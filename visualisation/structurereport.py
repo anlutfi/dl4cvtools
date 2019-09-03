@@ -1,4 +1,6 @@
 from colorama import Fore as f
+from keras.utils import plot_model
+import os
 
 def simpleReport(model):
     """simpleReport(model)
@@ -75,3 +77,27 @@ def simpleReport(model):
           + "\n\n******************************************************\n\n\n\n"
           + pllt['reset']
          )
+
+
+
+def plotModelLayers(model, outfname, makepath = True):
+    """plotModelLayers(model, outfname)
+
+       uses keras plotting function to plot a diagram
+       of MODEL's layers and save it as OUTFNAME
+
+       if outfname is in a non-existing directory
+       and MAKEPATH is set to true, the path will be created
+    """
+
+    if not os.path.exists(outfname.rpartition('/')[0]):
+        if makepath:
+            os.makedirs(outfname.rpartition('/')[0])
+        
+        else:
+            print("Non-existing directory {} set makepath = True to create it.".format(outfname)
+                 )
+            return
+
+    plot_model(model, to_file = outfname, show_shapes = True)    
+
