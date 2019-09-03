@@ -10,12 +10,9 @@ and many others are completely independent from its exercises
 
 current submodules are:
 
--callbacks
-
--dataloaders
-
--neural networks
-
--image preprocessors
--visualisation tools
--models
+-callbacks<br>
+-dataloaders<br>
+-neural networks<br>
+-image preprocessors<br>
+-visualisation tools<br>
+-models<br>
