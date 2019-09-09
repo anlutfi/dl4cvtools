@@ -2,7 +2,7 @@ import imutils
 import cv2
 
 def resizeFixedAspect(targetw, targeth = -1):
-    """resizeFixedAspect(img, targetw, targeth)
+    """resizeFixedAspect(img, targetw, targeth = -1)
 
        returns a function that receives an image IMG,
        that resizes it to TARGETW X TARGETH resolution,
