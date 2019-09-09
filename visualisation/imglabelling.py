@@ -1,7 +1,12 @@
 import cv2
 import numpy as np
 
-def showImgLabel(label, img = None, imgpath = ''):
+def showImgLabel(label,
+                 img = None,
+                 imgpath = '',
+                 title = "Labeled image"
+                ):
+
     """showImgLabel(label, img = None, imgpath = '')
 
        displays an image IMG with a text LABEL on the upper left corner
@@ -21,4 +26,6 @@ def showImgLabel(label, img = None, imgpath = ''):
                 (0, 255, 0),
                 3
                )
-    cv2.imshow("Labeled image", img)
+    cv2.imshow(title, img)
+    cv2.waitKey(0)
+    cv2.destroyWindow(title)
