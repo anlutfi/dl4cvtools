@@ -18,7 +18,7 @@ def resizeFixedAspect(targetw, targeth = -1):
     def preprocess(img):
         (h, w) = img.shape[:2]
 
-        if h > w:
+        if w > h:
             img = imutils.resize(img, width = targetw)
 
         else:
