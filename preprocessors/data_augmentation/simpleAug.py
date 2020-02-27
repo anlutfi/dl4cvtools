@@ -8,6 +8,9 @@ import numpy as np
 
 import argparse
 
+from os.path import join
+from os.path import sep
+
 def simpleAug(samples,
               img = None,
               imgpath = None,
@@ -19,7 +22,8 @@ def simpleAug(samples,
               shear_range = 0.2,
               zoom_range = 0.2,
               horizontal_flip = True,
-              fill_mode = "nearest"
+              fill_mode = "nearest",
+              save_format = 'jpg'
              ):
     """def simpleAug(img = None,
                   samples,
@@ -32,7 +36,8 @@ def simpleAug(samples,
                   shear_range = 0.2,
                   zoom_range = 0.2,
                   horizontal_flip = True,
-                  fill_mode = "nearest"
+                  fill_mode = "nearest",
+                  save_format = 'jpg'
                  ):
 
         Applies simple transformations to an image for data augmentation. Returns a list of samples transformed versions of the original image
@@ -61,16 +66,21 @@ def simpleAug(samples,
                                 fill_mode = fill_mode
                                )
 
-    imagegen = augger.flow(img, batch_size = 1)
+    imagegen = augger.flow(img,
+                           batch_size = 1,
+                           save_to_dir = outpath,
+                           save_prefix = (imgpath.split(sep)[-1].split('.')[0]
+                                          if imgpath is not None
+                                          else ''
+                                         ),
+                           save_format = save_format
+                          )
 
     result = []
 
     for i in range(samples):
         newimg = imagegen.next()
         result.append(newimg)
-
-        if outpath is not None:
-            save_img(newimg)
     
     return result
 
