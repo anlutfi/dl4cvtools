@@ -11,7 +11,7 @@ def showImgLabel(label,
 
        displays an image IMG with a text LABEL on the upper left corner
 
-       if img is None, loads image will be loaded from imgpath
+       if img is None, image will be loaded from imgpath
     """
     assert (img is not None or imgpath != '')
 

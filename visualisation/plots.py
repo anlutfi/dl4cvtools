@@ -202,7 +202,7 @@ def jsonLivePlot(jsonpath,
     buff = ''
     
     try:
-        # for every represhrate seconds, load and plot file
+        # for every refreshrate seconds, load and plot file
         while True:
             lock.acquire()
             try:
