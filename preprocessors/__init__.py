@@ -17,5 +17,7 @@ from .aspectawarepreprocessor import *
 # wrapper for corverting an image to an array
 from .imagetoarray import *
 
+# importing data augmentation tools
+from .data_augmentation import *
 
 
