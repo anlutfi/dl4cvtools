@@ -21,13 +21,13 @@ def resizeFixedAspect(targetw, targeth = -1, inter = cv2.INTER_AREA):
         if w < h:
             img = imutils.resize(img, width = targetw, inter = inter)
             delta = (img.shape[0] - targeth) // 2
-            img = img[delta:delta + targeth, :]
+            img = img[max(delta, 0):max(delta, 0) + targeth, :]
 
         else:
             img = imutils.resize(img, height = targeth, inter = inter)
             delta = (img.shape[1] - targetw) // 2
-            img = img[:, delta:delta + targetw]
+            img = img[:, max(delta, 0):max(delta, 0) + targetw]
         
-        return img
+        return cv2.resize(img, (targetw, targeth), interpolation = inter)
     
     return preprocess
