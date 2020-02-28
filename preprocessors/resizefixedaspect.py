@@ -1,7 +1,7 @@
 import imutils
 import cv2
 
-def resizeFixedAspect(targetw, targeth = -1):
+def resizeFixedAspect(targetw, targeth = -1, inter = cv2.INTER_AREA):
     """resizeFixedAspect(img, targetw, targeth = -1)
 
        returns a function that receives an image IMG,
@@ -18,25 +18,16 @@ def resizeFixedAspect(targetw, targeth = -1):
     def preprocess(img):
         (h, w) = img.shape[:2]
 
-        if w > h:
-            img = imutils.resize(img, width = targetw)
+        if w < h:
+            img = imutils.resize(img, width = targetw, inter = inter)
+            delta = (img.shape[0] - targeth) // 2
+            img = img[delta:delta + targeth, :]
 
         else:
-            img = imutils.resize(img, height = targeth)
-
-        padh = int( (targeth - h) / 2 )
-        padw = int( (targetw - w) / 2 )
+            img = imutils.resize(img, height = targeth, inter = inter)
+            delta = (img.shape[1] - targetw) // 2
+            img = img[:, delta:delta + targetw]
         
-        img = cv2.copyMakeBorder(img,
-                                 padh,
-                                 padh,
-                                 padw,
-                                 padw,
-                                 cv2.BORDER_REPLICATE
-                                )
-
-        img = cv2.resize( img, (targetw, targeth) )
-
         return img
     
     return preprocess
