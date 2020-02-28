@@ -26,6 +26,7 @@ def simpleDatasetLoader(imgpaths, verbose = 0, preprocessors = []):
     data = []
     labels = []
     
+    shapes = {}    
     for (i, imgpath) in enumerate(imgpaths):
         # assuming dataset/{label}/{image}
         img = cv2.imread(imgpath)
@@ -36,9 +37,16 @@ def simpleDatasetLoader(imgpaths, verbose = 0, preprocessors = []):
             
         data.append(img)
         labels.append(label)
+
+        l = shapes.get(img.shape, [])
+        l.append( (i, imgpath) ) 
+        shapes[img.shape] = l
         
         if verbose > 0 and i % verbose == 0:
             print(  "[INFO] processed {}/{}".format( i, len(imgpaths) )  )
+    
+    if len(  list(shapes.keys() )  ) > 1:
+        raise Exception("Data samples in different shapes: {}".format(shapes))
             
     return ( np.array(data), np.array(labels) )
 
