@@ -11,9 +11,6 @@ from .simplepreprocessor import *
 # preprocessor wrapper for image resizing without distoting
 from .resizefixedaspect import *
 
-# preprocessor wrapper for image resizing keeping aspect ratio and cropping
-from .aspectawarepreprocessor import *
-
 # wrapper for corverting an image to an array
 from .imagetoarray import *
 
